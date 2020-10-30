@@ -9,10 +9,17 @@ const stateDefault = {
 export const BaiTapBookTicketReducer = (state = stateDefault, action) => {
   switch (action.type) {
     case chon_ghe: {
-      return {
-        ...state,
-        arrGheDangChon: [...state.arrGheDangChon, action.ghe],
-      };
+      let arrGheDangChonUpdate = [...state.arrGheDangChon];
+      let index = arrGheDangChonUpdate.findIndex(
+        (ghe) => ghe.soGhe === action.ghe.soGhe
+      );
+      if (index === -1) {
+        arrGheDangChonUpdate.push(action.ghe);
+      } else {
+        arrGheDangChonUpdate.splice(index, 1);
+      }
+      state.arrGheDangChon = arrGheDangChonUpdate;
+      return { ...state };
     }
     case dat_ghe: {
       let arrAllGheCopy = [...state.arrAllGhe];

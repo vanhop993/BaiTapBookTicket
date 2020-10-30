@@ -31,29 +31,26 @@ class DanhSachGhe extends Component {
               let gheDangChon = arrGheDangChon.find(
                 (ghe) => ghe.soGhe === hangGhe.soGhe
               );
+              let gheDaDat = "";
+              let dangChon = "";
+              let disabled = false;
               if (hangGhe.daDat) {
-                return (
-                  <button className="ghe gheDuocChon" key={index}>
-                    {hangGhe.soGhe.split(obj.hang)[1]}
-                  </button>
-                );
-              } else if (gheDangChon) {
-                return (
-                  <button className="ghe gheDangChon" key={index}>
-                    {hangGhe.soGhe.split(obj.hang)[1]}
-                  </button>
-                );
-              } else {
-                return (
-                  <button
-                    className="ghe"
-                    key={index}
-                    onClick={() => this.props.dispatch(chonGhe(hangGhe))}
-                  >
-                    {hangGhe.soGhe.split(obj.hang)[1]}
-                  </button>
-                );
+                gheDaDat = "gheDuocChon";
+                disabled = true;
               }
+              if (gheDangChon) {
+                dangChon = "gheDangChon";
+              }
+              return (
+                <button
+                  disabled={disabled}
+                  className={`ghe ${gheDaDat} ${dangChon}`}
+                  key={index}
+                  onClick={() => this.props.dispatch(chonGhe(hangGhe))}
+                >
+                  {hangGhe.soGhe.split(obj.hang)[1]}
+                </button>
+              );
             })}
           </div>
         );
